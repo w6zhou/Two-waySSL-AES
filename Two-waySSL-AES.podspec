@@ -2,9 +2,9 @@ Pod::Spec.new do |s|
 
   s.name         = "Two-waySSL-AES"
   s.version      = "0.0.1"
-  s.summary      = "A short description of Two-waySSL-AES."
+  s.summary      = "A useful lib for network security."
   s.description  = <<-DESC
-  A useful lib for network security
+  This one use Two-way SSL to get key for AES encryption.
   DESC
 
   s.homepage     = "https://github.com/w6zhou/Two-waySSL-AES"
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/w6zhou/Two-waySSL-AES.git", :tag => s.version }
 
-  s.source_files  = "Classes", "Classes/**/*.{h,m}"
+  s.source_files  = 'Pod/Classes/*.{h,m}'
   s.exclude_files = "Classes/Exclude"
 
   s.requires_arc = true
