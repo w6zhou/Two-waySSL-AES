@@ -1,0 +1,307 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BDBDFDF41C311CD400858F16 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBDFDF31C311CD400858F16 /* main.m */; };
+		BDBDFDF71C311CD400858F16 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBDFDF61C311CD400858F16 /* AppDelegate.m */; };
+		BDBDFDFA1C311CD400858F16 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBDFDF91C311CD400858F16 /* ViewController.m */; };
+		BDBDFDFD1C311CD400858F16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDBDFDFB1C311CD400858F16 /* Main.storyboard */; };
+		BDBDFDFF1C311CD400858F16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDBDFDFE1C311CD400858F16 /* Assets.xcassets */; };
+		BDBDFE021C311CD400858F16 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BDBDFE001C311CD400858F16 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BDBDFDEF1C311CD400858F16 /* Two-waySSL-AES.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Two-waySSL-AES.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BDBDFDF31C311CD400858F16 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BDBDFDF51C311CD400858F16 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BDBDFDF61C311CD400858F16 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BDBDFDF81C311CD400858F16 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BDBDFDF91C311CD400858F16 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BDBDFDFC1C311CD400858F16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BDBDFDFE1C311CD400858F16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BDBDFE011C311CD400858F16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BDBDFE031C311CD400858F16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BDBDFDEC1C311CD400858F16 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BDBDFDE61C311CD400858F16 = {
+			isa = PBXGroup;
+			children = (
+				BDBDFDF11C311CD400858F16 /* Two-waySSL-AES */,
+				BDBDFDF01C311CD400858F16 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BDBDFDF01C311CD400858F16 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BDBDFDEF1C311CD400858F16 /* Two-waySSL-AES.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BDBDFDF11C311CD400858F16 /* Two-waySSL-AES */ = {
+			isa = PBXGroup;
+			children = (
+				BDBDFDF51C311CD400858F16 /* AppDelegate.h */,
+				BDBDFDF61C311CD400858F16 /* AppDelegate.m */,
+				BDBDFDF81C311CD400858F16 /* ViewController.h */,
+				BDBDFDF91C311CD400858F16 /* ViewController.m */,
+				BDBDFDFB1C311CD400858F16 /* Main.storyboard */,
+				BDBDFDFE1C311CD400858F16 /* Assets.xcassets */,
+				BDBDFE001C311CD400858F16 /* LaunchScreen.storyboard */,
+				BDBDFE031C311CD400858F16 /* Info.plist */,
+				BDBDFDF21C311CD400858F16 /* Supporting Files */,
+			);
+			path = "Two-waySSL-AES";
+			sourceTree = "<group>";
+		};
+		BDBDFDF21C311CD400858F16 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BDBDFDF31C311CD400858F16 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BDBDFDEE1C311CD400858F16 /* Two-waySSL-AES */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BDBDFE061C311CD400858F16 /* Build configuration list for PBXNativeTarget "Two-waySSL-AES" */;
+			buildPhases = (
+				BDBDFDEB1C311CD400858F16 /* Sources */,
+				BDBDFDEC1C311CD400858F16 /* Frameworks */,
+				BDBDFDED1C311CD400858F16 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Two-waySSL-AES";
+			productName = "Two-waySSL-AES";
+			productReference = BDBDFDEF1C311CD400858F16 /* Two-waySSL-AES.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BDBDFDE71C311CD400858F16 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Wenqi Zhou";
+				TargetAttributes = {
+					BDBDFDEE1C311CD400858F16 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = BDBDFDEA1C311CD400858F16 /* Build configuration list for PBXProject "Two-waySSL-AES" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BDBDFDE61C311CD400858F16;
+			productRefGroup = BDBDFDF01C311CD400858F16 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BDBDFDEE1C311CD400858F16 /* Two-waySSL-AES */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BDBDFDED1C311CD400858F16 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDBDFE021C311CD400858F16 /* LaunchScreen.storyboard in Resources */,
+				BDBDFDFF1C311CD400858F16 /* Assets.xcassets in Resources */,
+				BDBDFDFD1C311CD400858F16 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BDBDFDEB1C311CD400858F16 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BDBDFDFA1C311CD400858F16 /* ViewController.m in Sources */,
+				BDBDFDF71C311CD400858F16 /* AppDelegate.m in Sources */,
+				BDBDFDF41C311CD400858F16 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BDBDFDFB1C311CD400858F16 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BDBDFDFC1C311CD400858F16 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BDBDFE001C311CD400858F16 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BDBDFE011C311CD400858F16 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BDBDFE041C311CD400858F16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BDBDFE051C311CD400858F16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BDBDFE071C311CD400858F16 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Two-waySSL-AES/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "wzhou.Two-waySSL-AES";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BDBDFE081C311CD400858F16 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Two-waySSL-AES/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "wzhou.Two-waySSL-AES";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BDBDFDEA1C311CD400858F16 /* Build configuration list for PBXProject "Two-waySSL-AES" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDBDFE041C311CD400858F16 /* Debug */,
+				BDBDFE051C311CD400858F16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BDBDFE061C311CD400858F16 /* Build configuration list for PBXNativeTarget "Two-waySSL-AES" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BDBDFE071C311CD400858F16 /* Debug */,
+				BDBDFE081C311CD400858F16 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BDBDFDE71C311CD400858F16 /* Project object */;
+}
