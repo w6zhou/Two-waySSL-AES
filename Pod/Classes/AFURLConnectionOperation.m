@@ -592,71 +592,44 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
 willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
 //    双向加密
-//    if (self.authenticationChallenge) {
-//        self.authenticationChallenge(connection, challenge);
-//        return;
-//    }
-//
-//    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-//        if ([self.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) {
-//            NSURLCredential *credential = [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust];
-//            [[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
-//        } else {
-//            [[challenge sender] cancelAuthenticationChallenge:challenge];
-//        }
-//    } else {
-//        if ([challenge previousFailureCount] == 0) {
-//            if (self.credential) {
-//                [[challenge sender] useCredential:self.credential forAuthenticationChallenge:challenge];
-//            } else {
-//                [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
-//            }
-//        } else {
-//            [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
-//        }
-//    }
+    if (self.authenticationChallenge) {
+        self.authenticationChallenge(connection, challenge);
+        return;
+    }
 
-    NSString *thePath = [[NSBundle mainBundle] pathForResource:@"client" ofType:@"p12"];
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+        if ([self.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) {
+            NSString *thePath = [[NSBundle mainBundle] pathForResource:@"client" ofType:@"p12"];
+            NSData *PKCS12Data = [[NSData alloc] initWithContentsOfFile:thePath];
+            CFDataRef inPKCS12Data = (__bridge CFDataRef)PKCS12Data;
+            
+            SecIdentityRef identity = NULL;
+            
+            // extract the ideneity from the certificate
+            [self extractIdentity:inPKCS12Data :&identity];
+
+            SecCertificateRef certificate = NULL;
+            
+            SecIdentityCopyCertificate (identity, &certificate);
+            
+            NSURLCredential *credential = [NSURLCredential credentialWithIdentity:identity certificates:nil persistence:NSURLCredentialPersistencePermanent];
+            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
+        } else {
+            [[challenge sender] cancelAuthenticationChallenge:challenge];
+        }
+    } else {
+        if ([challenge previousFailureCount] == 0) {
+            if (self.credential) {
+                [[challenge sender] useCredential:self.credential forAuthenticationChallenge:challenge];
+            } else {
+                [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
+            }
+        } else {
+            [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
+        }
+    }
+
     
-    NSLog(@"thePath===========%@",thePath);
-    
-    NSData *PKCS12Data = [[NSData alloc] initWithContentsOfFile:thePath];
-    
-    CFDataRef inPKCS12Data = (__bridge CFDataRef)PKCS12Data;
-    
-    
-    
-    SecIdentityRef identity = NULL;
-    
-    // extract the ideneity from the certificate
-    
-    [self extractIdentity :inPKCS12Data :&identity];
-    
-    
-    
-    SecCertificateRef certificate = NULL;
-    
-    SecIdentityCopyCertificate (identity, &certificate);
-    
-    
-    
-//    const void *certs[] = {certificate};
-    
-    //                        CFArrayRef certArray = CFArrayCreate(kCFAllocatorDefault, certs, 1, NULL);
-    
-    // create a credential from the certificate and ideneity, then reply to the challenge with the credential
-    
-    //NSLog(@"identity=========%@",identity);
-    
-    NSURLCredential *credential = [NSURLCredential credentialWithIdentity:identity certificates:nil persistence:NSURLCredentialPersistencePermanent];
-    
-    
-    
-    //           credential = [NSURLCredential credentialWithIdentity:identity certificates:(__bridge NSArray*)certArray persistence:NSURLCredentialPersistencePermanent];
-    
-    
-    
-    [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
 }
 
 - (OSStatus)extractIdentity:(CFDataRef)inP12Data :(SecIdentityRef*)identity {
