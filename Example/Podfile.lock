@@ -1,0 +1,14 @@
+PODS:
+  - Two-waySSL-AES (0.0.1)
+
+DEPENDENCIES:
+  - Two-waySSL-AES (from `../`)
+
+EXTERNAL SOURCES:
+  Two-waySSL-AES:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Two-waySSL-AES: f02b5e5091c43f479a9bcc31d656d48aa8084b8a
+
+COCOAPODS: 0.39.0

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9DF4AA6895AC745A6F40783A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D13EFB96D087D367677824 /* libPods.a */; };
 		BDBDFDF41C311CD400858F16 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBDFDF31C311CD400858F16 /* main.m */; };
 		BDBDFDF71C311CD400858F16 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBDFDF61C311CD400858F16 /* AppDelegate.m */; };
 		BDBDFDFA1C311CD400858F16 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDBDFDF91C311CD400858F16 /* ViewController.m */; };
@@ -16,6 +17,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06D003E313106F2977F226B5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		468595CBDC9FA89A1AEAFC02 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		63D13EFB96D087D367677824 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDBDFDEF1C311CD400858F16 /* Two-waySSL-AES.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Two-waySSL-AES.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDBDFDF31C311CD400858F16 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BDBDFDF51C311CD400858F16 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -33,17 +37,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DF4AA6895AC745A6F40783A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1FBCF3230195171FB6731A58 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				06D003E313106F2977F226B5 /* Pods.debug.xcconfig */,
+				468595CBDC9FA89A1AEAFC02 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		33971C6830F01971A80AF33F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				63D13EFB96D087D367677824 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BDBDFDE61C311CD400858F16 = {
 			isa = PBXGroup;
 			children = (
 				BDBDFDF11C311CD400858F16 /* Two-waySSL-AES */,
 				BDBDFDF01C311CD400858F16 /* Products */,
+				1FBCF3230195171FB6731A58 /* Pods */,
+				33971C6830F01971A80AF33F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,9 +110,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BDBDFE061C311CD400858F16 /* Build configuration list for PBXNativeTarget "Two-waySSL-AES" */;
 			buildPhases = (
+				9CB60828F97EC75C8ADC1F47 /* Check Pods Manifest.lock */,
 				BDBDFDEB1C311CD400858F16 /* Sources */,
 				BDBDFDEC1C311CD400858F16 /* Frameworks */,
 				BDBDFDED1C311CD400858F16 /* Resources */,
+				7B5294EB2C4C2E109D15A600 /* Embed Pods Frameworks */,
+				A58D84701D05BEF93FFA40EA /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -143,6 +170,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7B5294EB2C4C2E109D15A600 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CB60828F97EC75C8ADC1F47 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A58D84701D05BEF93FFA40EA /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BDBDFDEB1C311CD400858F16 /* Sources */ = {
@@ -261,6 +336,7 @@
 		};
 		BDBDFE071C311CD400858F16 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 06D003E313106F2977F226B5 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Two-waySSL-AES/Info.plist";
@@ -272,6 +348,7 @@
 		};
 		BDBDFE081C311CD400858F16 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 468595CBDC9FA89A1AEAFC02 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Two-waySSL-AES/Info.plist";
@@ -300,6 +377,7 @@
 				BDBDFE081C311CD400858F16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
