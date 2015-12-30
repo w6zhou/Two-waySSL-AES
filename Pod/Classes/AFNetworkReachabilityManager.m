@@ -36,14 +36,14 @@ typedef void (^AFNetworkReachabilityStatusBlock)(AFNetworkReachabilityStatus sta
 NSString * AFStringFromNetworkReachabilityStatus(AFNetworkReachabilityStatus status) {
     switch (status) {
         case AFNetworkReachabilityStatusNotReachable:
-            return NSLocalizedStringFromTable(@"Not Reachable", @"AFNetworking", nil);
+            return NSLocalizedStringFromTable(@"Not Reachable", @"WZNetworking", nil);
         case AFNetworkReachabilityStatusReachableViaWWAN:
-            return NSLocalizedStringFromTable(@"Reachable via WWAN", @"AFNetworking", nil);
+            return NSLocalizedStringFromTable(@"Reachable via WWAN", @"WZNetworking", nil);
         case AFNetworkReachabilityStatusReachableViaWiFi:
-            return NSLocalizedStringFromTable(@"Reachable via WiFi", @"AFNetworking", nil);
+            return NSLocalizedStringFromTable(@"Reachable via WiFi", @"WZNetworking", nil);
         case AFNetworkReachabilityStatusUnknown:
         default:
-            return NSLocalizedStringFromTable(@"Unknown", @"AFNetworking", nil);
+            return NSLocalizedStringFromTable(@"Unknown", @"WZNetworking", nil);
     }
 }
 

@@ -10,8 +10,8 @@
 #endif
 
 #if !__has_feature(objc_arc)
-#error AFNetworking must be built with ARC.
-// You can turn on ARC for only AFNetworking files by adding -fobjc-arc to the build phase for each of its files.
+#error WZNetworking must be built with ARC.
+// You can turn on ARC for only WZNetworking files by adding -fobjc-arc to the build phase for each of its files.
 #endif
 
 typedef NS_ENUM(NSInteger, AFOperationState) {
@@ -140,7 +140,7 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
 
 + (void)networkRequestThreadEntryPoint:(id)__unused object {
     @autoreleasepool {
-        [[NSThread currentThread] setName:@"AFNetworking"];
+        [[NSThread currentThread] setName:@"WZNetworking"];
 
         NSRunLoop *runLoop = [NSRunLoop currentRunLoop];
         [runLoop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
@@ -576,45 +576,23 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
 willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
 //    双向加密
-    if (self.authenticationChallenge) {
-        self.authenticationChallenge(connection, challenge);
-        return;
+    if (!self.clientCertPath) {
+        self.clientCertPath = [[NSBundle mainBundle] pathForResource:@"client" ofType:@"p12"];
     }
-
-    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
-        if ([self.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) {
-            if (!self.clientCertPath) {
-                self.clientCertPath = [[NSBundle mainBundle] pathForResource:@"client" ofType:@"p12"];
-            }
-            NSData *PKCS12Data = [[NSData alloc] initWithContentsOfFile:self.clientCertPath];
-            CFDataRef inPKCS12Data = (__bridge CFDataRef)PKCS12Data;
-            
-            SecIdentityRef identity = NULL;
-            
-            // extract the ideneity from the certificate
-            [self extractIdentity:inPKCS12Data :&identity];
-
-            SecCertificateRef certificate = NULL;
-            
-            SecIdentityCopyCertificate (identity, &certificate);
-            
-            NSURLCredential *credential = [NSURLCredential credentialWithIdentity:identity certificates:nil persistence:NSURLCredentialPersistencePermanent];
-            [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
-        } else {
-            [[challenge sender] cancelAuthenticationChallenge:challenge];
-        }
-    } else {
-        if ([challenge previousFailureCount] == 0) {
-            if (self.credential) {
-                [[challenge sender] useCredential:self.credential forAuthenticationChallenge:challenge];
-            } else {
-                [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
-            }
-        } else {
-            [[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
-        }
-    }
-
+    NSData *PKCS12Data = [[NSData alloc] initWithContentsOfFile:self.clientCertPath];
+    CFDataRef inPKCS12Data = (__bridge CFDataRef)PKCS12Data;
+    
+    SecIdentityRef identity = NULL;
+    
+    // extract the ideneity from the certificate
+    [self extractIdentity:inPKCS12Data :&identity];
+    
+    SecCertificateRef certificate = NULL;
+    
+    SecIdentityCopyCertificate (identity, &certificate);
+    
+    NSURLCredential *credential = [NSURLCredential credentialWithIdentity:identity certificates:nil persistence:NSURLCredentialPersistencePermanent];
+    [challenge.sender useCredential:credential forAuthenticationChallenge:challenge];
     
 }
 

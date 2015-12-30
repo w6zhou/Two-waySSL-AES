@@ -38,8 +38,8 @@ static NSString *baseURLString = @"";
             [request setHTTPMethod:@"DELETE"];
             break;
     }
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 
     NSString *jsonString = nil;
     if (body) {

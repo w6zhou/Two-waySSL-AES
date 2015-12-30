@@ -267,9 +267,9 @@ expectedTotalBytes:(int64_t)expectedTotalBytes {
  *  A workaround for issues related to key-value observing the `state` of an `NSURLSessionTask`.
  *
  *  See:
- *  - https://github.com/AFNetworking/AFNetworking/issues/1477
- *  - https://github.com/AFNetworking/AFNetworking/issues/2638
- *  - https://github.com/AFNetworking/AFNetworking/pull/2702
+ *  - https://github.com/WZNetworking/WZNetworking/issues/1477
+ *  - https://github.com/WZNetworking/WZNetworking/issues/2638
+ *  - https://github.com/WZNetworking/WZNetworking/pull/2702
  */
 
 static inline void af_swizzleSelector(Class theClass, SEL originalSelector, SEL swizzledSelector) {
@@ -294,7 +294,7 @@ static NSString * const AFNSURLSessionTaskDidSuspendNotification = @"com.alamofi
 + (void)load {
     /**
      WARNING: Trouble Ahead
-     https://github.com/AFNetworking/AFNetworking/pull/2702
+     https://github.com/WZNetworking/WZNetworking/pull/2702
      */
 
     if (NSClassFromString(@"NSURLSessionTask")) {
