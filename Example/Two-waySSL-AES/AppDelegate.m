@@ -21,7 +21,7 @@
     // Override point for customization after application launch.
     [WZURLRequest setAPIBaseURL:@"https://54.223.243.129:10088/api"];
     NSMutableURLRequest *request = [WZURLRequest createRequestWithURLString:@"/connect" body:@{@"message_type":@2} method:WZHTTPRequestMethodPost];
-    [request setValue:@"app.11bnb.com" forHTTPHeaderField:@"Host"];
+    [request setValue:@"100000" forHTTPHeaderField:@"User-Uin"];
     [request setValue:[@"1." stringByAppendingString:[[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]] forHTTPHeaderField:@"Client-Version"];
     [request setValue:@"iOS" forHTTPHeaderField:@"Req-From"];
     [request setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]].stringValue forHTTPHeaderField:@"Req-Time"];

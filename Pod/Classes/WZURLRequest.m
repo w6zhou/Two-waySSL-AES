@@ -62,7 +62,7 @@ static NSString *baseURLString = @"";
         
         [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
     }
-    
+    NSLog(@"%@", [NSString stringWithFormat:@"Request:%@\nHeader:%@\nBody:%@",request, [request allHTTPHeaderFields], jsonString]);
     return request;
 }
 
