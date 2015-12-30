@@ -169,6 +169,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, strong) AFSecurityPolicy *securityPolicy;
 
+@property (nonatomic, strong) NSString *clientCertPath;
+
 ///------------------------
 /// @name Accessing Streams
 ///------------------------

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '03C257F55F1F1304FD6F026E'
+               BlueprintIdentifier = '42C9F365CBFA60D251D5374C'
                BlueprintName = 'Two-waySSL-AES'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libTwo-waySSL-AES.a'>

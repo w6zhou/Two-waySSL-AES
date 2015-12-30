@@ -583,8 +583,10 @@ willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challe
 
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
         if ([self.securityPolicy evaluateServerTrust:challenge.protectionSpace.serverTrust forDomain:challenge.protectionSpace.host]) {
-            NSString *thePath = [[NSBundle mainBundle] pathForResource:@"client" ofType:@"p12"];
-            NSData *PKCS12Data = [[NSData alloc] initWithContentsOfFile:thePath];
+            if (!self.clientCertPath) {
+                self.clientCertPath = [[NSBundle mainBundle] pathForResource:@"client" ofType:@"p12"];
+            }
+            NSData *PKCS12Data = [[NSData alloc] initWithContentsOfFile:self.clientCertPath];
             CFDataRef inPKCS12Data = (__bridge CFDataRef)PKCS12Data;
             
             SecIdentityRef identity = NULL;

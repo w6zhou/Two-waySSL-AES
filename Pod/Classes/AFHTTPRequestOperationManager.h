@@ -29,7 +29,7 @@
 #import <CoreServices/CoreServices.h>
 #endif
 
-#import "AFHTTPRequestOperation.h"
+#import "WZHTTPRequestOperation.h"
 #import "AFURLResponseSerialization.h"
 #import "AFURLRequestSerialization.h"
 #import "AFSecurityPolicy.h"
@@ -206,9 +206,9 @@ NS_ASSUME_NONNULL_BEGIN
  @param success A block object to be executed when the request operation finishes successfully. This block has no return value and takes two arguments: the created request operation and the object created from the response data of request.
  @param failure A block object to be executed when the request operation finishes unsuccessfully, or that finishes successfully, but encountered an error while parsing the response data. This block has no return value and takes two arguments:, the created request operation and the `NSError` object describing the network or parsing error that occurred.
  */
-- (AFHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)request
-                                                    success:(nullable void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                                    failure:(nullable void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (WZHTTPRequestOperation *)HTTPRequestOperationWithRequest:(NSURLRequest *)request
+                                                    success:(nullable void (^)(WZHTTPRequestOperation *operation, id responseObject))success
+                                                    failure:(nullable void (^)(WZHTTPRequestOperation *operation, NSError *error))failure;
 
 ///---------------------------
 /// @name Making HTTP Requests
@@ -224,10 +224,10 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -HTTPRequestOperationWithRequest:success:failure:
  */
-- (nullable AFHTTPRequestOperation *)GET:(NSString *)URLString
+- (nullable WZHTTPRequestOperation *)GET:(NSString *)URLString
                      parameters:(nullable id)parameters
-                        success:(nullable void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                        failure:(nullable void (^)(AFHTTPRequestOperation * __nullable operation, NSError *error))failure;
+                        success:(nullable void (^)(WZHTTPRequestOperation *operation, id responseObject))success
+                        failure:(nullable void (^)(WZHTTPRequestOperation * __nullable operation, NSError *error))failure;
 
 /**
  Creates and runs an `AFHTTPRequestOperation` with a `HEAD` request.
@@ -239,10 +239,10 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -HTTPRequestOperationWithRequest:success:failure:
  */
-- (nullable AFHTTPRequestOperation *)HEAD:(NSString *)URLString
+- (nullable WZHTTPRequestOperation *)HEAD:(NSString *)URLString
                       parameters:(nullable id)parameters
-                         success:(nullable void (^)(AFHTTPRequestOperation *operation))success
-                         failure:(nullable void (^)(AFHTTPRequestOperation * __nullable operation, NSError *error))failure;
+                         success:(nullable void (^)(WZHTTPRequestOperation *operation))success
+                         failure:(nullable void (^)(WZHTTPRequestOperation * __nullable operation, NSError *error))failure;
 
 /**
  Creates and runs an `AFHTTPRequestOperation` with a `POST` request.
@@ -254,10 +254,10 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -HTTPRequestOperationWithRequest:success:failure:
  */
-- (nullable AFHTTPRequestOperation *)POST:(NSString *)URLString
+- (nullable WZHTTPRequestOperation *)POST:(NSString *)URLString
                       parameters:(nullable id)parameters
-                         success:(nullable void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                         failure:(nullable void (^)(AFHTTPRequestOperation * __nullable operation, NSError *error))failure;
+                         success:(nullable void (^)(WZHTTPRequestOperation *operation, id responseObject))success
+                         failure:(nullable void (^)(WZHTTPRequestOperation * __nullable operation, NSError *error))failure;
 
 /**
  Creates and runs an `AFHTTPRequestOperation` with a multipart `POST` request.
@@ -270,11 +270,11 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -HTTPRequestOperationWithRequest:success:failure:
  */
-- (nullable AFHTTPRequestOperation *)POST:(NSString *)URLString
+- (nullable WZHTTPRequestOperation *)POST:(NSString *)URLString
                       parameters:(nullable id)parameters
        constructingBodyWithBlock:(nullable void (^)(id <AFMultipartFormData> formData))block
-                         success:(nullable void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                         failure:(nullable void (^)(AFHTTPRequestOperation * __nullable operation, NSError *error))failure;
+                         success:(nullable void (^)(WZHTTPRequestOperation *operation, id responseObject))success
+                         failure:(nullable void (^)(WZHTTPRequestOperation * __nullable operation, NSError *error))failure;
 
 /**
  Creates and runs an `AFHTTPRequestOperation` with a `PUT` request.
@@ -286,10 +286,10 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -HTTPRequestOperationWithRequest:success:failure:
  */
-- (nullable AFHTTPRequestOperation *)PUT:(NSString *)URLString
+- (nullable WZHTTPRequestOperation *)PUT:(NSString *)URLString
                      parameters:(nullable id)parameters
-                        success:(nullable void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                        failure:(nullable void (^)(AFHTTPRequestOperation * __nullable operation, NSError *error))failure;
+                        success:(nullable void (^)(WZHTTPRequestOperation *operation, id responseObject))success
+                        failure:(nullable void (^)(WZHTTPRequestOperation * __nullable operation, NSError *error))failure;
 
 /**
  Creates and runs an `AFHTTPRequestOperation` with a `PATCH` request.
@@ -301,10 +301,10 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -HTTPRequestOperationWithRequest:success:failure:
  */
-- (nullable AFHTTPRequestOperation *)PATCH:(NSString *)URLString
+- (nullable WZHTTPRequestOperation *)PATCH:(NSString *)URLString
                        parameters:(nullable id)parameters
-                          success:(nullable void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                          failure:(nullable void (^)(AFHTTPRequestOperation * __nullable operation, NSError *error))failure;
+                          success:(nullable void (^)(WZHTTPRequestOperation *operation, id responseObject))success
+                          failure:(nullable void (^)(WZHTTPRequestOperation * __nullable operation, NSError *error))failure;
 
 /**
  Creates and runs an `AFHTTPRequestOperation` with a `DELETE` request.
@@ -316,10 +316,10 @@ NS_ASSUME_NONNULL_BEGIN
 
  @see -HTTPRequestOperationWithRequest:success:failure:
  */
-- (nullable AFHTTPRequestOperation *)DELETE:(NSString *)URLString
+- (nullable WZHTTPRequestOperation *)DELETE:(NSString *)URLString
                         parameters:(nullable id)parameters
-                           success:(nullable void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                           failure:(nullable void (^)(AFHTTPRequestOperation * __nullable operation, NSError *error))failure;
+                           success:(nullable void (^)(WZHTTPRequestOperation *operation, id responseObject))success
+                           failure:(nullable void (^)(WZHTTPRequestOperation * __nullable operation, NSError *error))failure;
 
 @end
 
