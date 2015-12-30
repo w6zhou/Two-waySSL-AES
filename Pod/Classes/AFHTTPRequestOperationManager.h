@@ -33,7 +33,7 @@
 #import "AFURLResponseSerialization.h"
 #import "AFURLRequestSerialization.h"
 #import "AFSecurityPolicy.h"
-#import "AFNetworkReachabilityManager.h"
+#import "WZNetworkReachabilityManager.h"
 
 #ifndef NS_DESIGNATED_INITIALIZER
 #if __has_attribute(objc_designated_initializer)
@@ -82,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  ## Network Reachability Monitoring
 
- Network reachability status and change monitoring is available through the `reachabilityManager` property. Applications may choose to monitor network reachability conditions in order to prevent or suspend any outbound requests. See `AFNetworkReachabilityManager` for more details.
+ Network reachability status and change monitoring is available through the `reachabilityManager` property. Applications may choose to monitor network reachability conditions in order to prevent or suspend any outbound requests. See `WZNetworkReachabilityManager` for more details.
 
  ## NSSecureCoding & NSCopying Caveats
 
@@ -151,7 +151,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The network reachability manager. `AFHTTPRequestOperationManager` uses the `sharedManager` by default.
  */
-@property (readwrite, nonatomic, strong) AFNetworkReachabilityManager *reachabilityManager;
+@property (readwrite, nonatomic, strong) WZNetworkReachabilityManager *reachabilityManager;
 
 ///-------------------------------
 /// @name Managing Callback Queues

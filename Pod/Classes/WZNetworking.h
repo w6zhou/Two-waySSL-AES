@@ -29,10 +29,11 @@
     #import "AFURLRequestSerialization.h"
     #import "AFURLResponseSerialization.h"
     #import "AFSecurityPolicy.h"
+    #import "WZURLRequest.h"
 #if !TARGET_OS_WATCH
-    #import "AFNetworkReachabilityManager.h"
+    #import "WZNetworkReachabilityManager.h"
     #import "AFURLConnectionOperation.h"
-    #import "AFHTTPRequestOperation.h"
+    #import "WZHTTPRequestOperation.h"
     #import "AFHTTPRequestOperationManager.h"
 #endif
 

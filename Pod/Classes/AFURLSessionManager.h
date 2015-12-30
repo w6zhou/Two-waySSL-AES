@@ -25,7 +25,7 @@
 #import "AFURLRequestSerialization.h"
 #import "AFSecurityPolicy.h"
 #if !TARGET_OS_WATCH
-#import "AFNetworkReachabilityManager.h"
+#import "WZNetworkReachabilityManager.h"
 #endif
 
 #ifndef NS_DESIGNATED_INITIALIZER
@@ -77,7 +77,7 @@
 
  ## Network Reachability Monitoring
 
- Network reachability status and change monitoring is available through the `reachabilityManager` property. Applications may choose to monitor network reachability conditions in order to prevent or suspend any outbound requests. See `AFNetworkReachabilityManager` for more details.
+ Network reachability status and change monitoring is available through the `reachabilityManager` property. Applications may choose to monitor network reachability conditions in order to prevent or suspend any outbound requests. See `WZNetworkReachabilityManager` for more details.
 
  ## NSCoding Caveats
 
@@ -131,7 +131,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  The network reachability manager. `AFURLSessionManager` uses the `sharedManager` by default.
  */
-@property (readwrite, nonatomic, strong) AFNetworkReachabilityManager *reachabilityManager;
+@property (readwrite, nonatomic, strong) WZNetworkReachabilityManager *reachabilityManager;
 #endif
 
 ///----------------------------
@@ -455,31 +455,31 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Posted when a task begins executing.
 
- @deprecated Use `AFNetworkingTaskDidResumeNotification` instead.
+ @deprecated Use `WZNetworkingTaskDidResumeNotification` instead.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidStartNotification DEPRECATED_ATTRIBUTE;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidStartNotification DEPRECATED_ATTRIBUTE;
 
 /**
  Posted when a task resumes.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidResumeNotification;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidResumeNotification;
 
 /**
  Posted when a task finishes executing. Includes a userInfo dictionary with additional information about the task.
 
- @deprecated Use `AFNetworkingTaskDidCompleteNotification` instead.
+ @deprecated Use `WZNetworkingTaskDidCompleteNotification` instead.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidFinishNotification DEPRECATED_ATTRIBUTE;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidFinishNotification DEPRECATED_ATTRIBUTE;
 
 /**
  Posted when a task finishes executing. Includes a userInfo dictionary with additional information about the task.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidCompleteNotification;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidCompleteNotification;
 
 /**
  Posted when a task suspends its execution.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidSuspendNotification;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidSuspendNotification;
 
 /**
  Posted when a session is invalidated.
@@ -492,63 +492,63 @@ FOUNDATION_EXPORT NSString * const AFURLSessionDidInvalidateNotification;
 FOUNDATION_EXPORT NSString * const AFURLSessionDownloadTaskDidFailToMoveFileNotification;
 
 /**
- The raw response data of the task. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if response data exists for the task.
+ The raw response data of the task. Included in the userInfo dictionary of the `WZNetworkingTaskDidFinishNotification` if response data exists for the task.
 
- @deprecated Use `AFNetworkingTaskDidCompleteResponseDataKey` instead.
+ @deprecated Use `WZNetworkingTaskDidCompleteResponseDataKey` instead.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidFinishResponseDataKey DEPRECATED_ATTRIBUTE;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidFinishResponseDataKey DEPRECATED_ATTRIBUTE;
 
 /**
- The raw response data of the task. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if response data exists for the task.
+ The raw response data of the task. Included in the userInfo dictionary of the `WZNetworkingTaskDidFinishNotification` if response data exists for the task.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidCompleteResponseDataKey;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidCompleteResponseDataKey;
 
 /**
- The serialized response object of the task. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if the response was serialized.
+ The serialized response object of the task. Included in the userInfo dictionary of the `WZNetworkingTaskDidFinishNotification` if the response was serialized.
 
- @deprecated Use `AFNetworkingTaskDidCompleteSerializedResponseKey` instead.
+ @deprecated Use `WZNetworkingTaskDidCompleteSerializedResponseKey` instead.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidFinishSerializedResponseKey DEPRECATED_ATTRIBUTE;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidFinishSerializedResponseKey DEPRECATED_ATTRIBUTE;
 
 /**
- The serialized response object of the task. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if the response was serialized.
+ The serialized response object of the task. Included in the userInfo dictionary of the `WZNetworkingTaskDidFinishNotification` if the response was serialized.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidCompleteSerializedResponseKey;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidCompleteSerializedResponseKey;
 
 /**
- The response serializer used to serialize the response. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if the task has an associated response serializer.
+ The response serializer used to serialize the response. Included in the userInfo dictionary of the `WZNetworkingTaskDidFinishNotification` if the task has an associated response serializer.
 
- @deprecated Use `AFNetworkingTaskDidCompleteResponseSerializerKey` instead.
+ @deprecated Use `WZNetworkingTaskDidCompleteResponseSerializerKey` instead.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidFinishResponseSerializerKey DEPRECATED_ATTRIBUTE;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidFinishResponseSerializerKey DEPRECATED_ATTRIBUTE;
 
 /**
- The response serializer used to serialize the response. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if the task has an associated response serializer.
+ The response serializer used to serialize the response. Included in the userInfo dictionary of the `WZNetworkingTaskDidFinishNotification` if the task has an associated response serializer.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidCompleteResponseSerializerKey;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidCompleteResponseSerializerKey;
 
 /**
- The file path associated with the download task. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if an the response data has been stored directly to disk.
+ The file path associated with the download task. Included in the userInfo dictionary of the `WZNetworkingTaskDidFinishNotification` if an the response data has been stored directly to disk.
 
- @deprecated Use `AFNetworkingTaskDidCompleteAssetPathKey` instead.
+ @deprecated Use `WZNetworkingTaskDidCompleteAssetPathKey` instead.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidFinishAssetPathKey DEPRECATED_ATTRIBUTE;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidFinishAssetPathKey DEPRECATED_ATTRIBUTE;
 
 /**
- The file path associated with the download task. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if an the response data has been stored directly to disk.
+ The file path associated with the download task. Included in the userInfo dictionary of the `WZNetworkingTaskDidFinishNotification` if an the response data has been stored directly to disk.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidCompleteAssetPathKey;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidCompleteAssetPathKey;
 
 /**
- Any error associated with the task, or the serialization of the response. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if an error exists.
+ Any error associated with the task, or the serialization of the response. Included in the userInfo dictionary of the `WZNetworkingTaskDidFinishNotification` if an error exists.
 
- @deprecated Use `AFNetworkingTaskDidCompleteErrorKey` instead.
+ @deprecated Use `WZNetworkingTaskDidCompleteErrorKey` instead.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidFinishErrorKey DEPRECATED_ATTRIBUTE;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidFinishErrorKey DEPRECATED_ATTRIBUTE;
 
 /**
- Any error associated with the task, or the serialization of the response. Included in the userInfo dictionary of the `AFNetworkingTaskDidFinishNotification` if an error exists.
+ Any error associated with the task, or the serialization of the response. Included in the userInfo dictionary of the `WZNetworkingTaskDidFinishNotification` if an error exists.
  */
-FOUNDATION_EXPORT NSString * const AFNetworkingTaskDidCompleteErrorKey;
+FOUNDATION_EXPORT NSString * const WZNetworkingTaskDidCompleteErrorKey;
 
 NS_ASSUME_NONNULL_END

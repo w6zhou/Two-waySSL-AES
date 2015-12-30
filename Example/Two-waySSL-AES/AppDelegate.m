@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import <Two-waySSL-AES/WZURLRequest.h>
-#import <Two-waySSL-AES/WZHTTPRequestOperation.h>
+#import <Two-waySSL-AES/WZNetworking.h>
 
 @interface AppDelegate ()
 

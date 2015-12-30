@@ -10,9 +10,7 @@
   },
   "platforms": {
     "ios": "8.0",
-    "osx": "10.10",
-    "watchos": "2.0",
-    "tvos": "9.0"
+    "osx": "10.10"
   },
   "source": {
     "git": "https://github.com/w6zhou/Two-waySSL-AES.git",

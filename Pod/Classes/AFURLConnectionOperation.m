@@ -41,10 +41,10 @@ static dispatch_queue_t url_request_operation_completion_queue() {
     return af_url_request_operation_completion_queue;
 }
 
-static NSString * const kAFNetworkingLockName = @"com.alamofire.networking.operation.lock";
+static NSString * const kWZNetworkingLockName = @"com.alamofire.networking.operation.lock";
 
-NSString * const AFNetworkingOperationDidStartNotification = @"com.alamofire.networking.operation.start";
-NSString * const AFNetworkingOperationDidFinishNotification = @"com.alamofire.networking.operation.finish";
+NSString * const WZNetworkingOperationDidStartNotification = @"com.alamofire.networking.operation.start";
+NSString * const WZNetworkingOperationDidFinishNotification = @"com.alamofire.networking.operation.finish";
 
 typedef void (^AFURLConnectionOperationProgressBlock)(NSUInteger bytes, long long totalBytes, long long totalBytesExpected);
 typedef void (^AFURLConnectionOperationAuthenticationChallengeBlock)(NSURLConnection *connection, NSURLAuthenticationChallenge *challenge);
@@ -170,7 +170,7 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
     _state = AFOperationReadyState;
 
     self.lock = [[NSRecursiveLock alloc] init];
-    self.lock.name = kAFNetworkingLockName;
+    self.lock.name = kWZNetworkingLockName;
 
     self.runLoopModes = [NSSet setWithObject:NSRunLoopCommonModes];
 
@@ -331,7 +331,7 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
 
         dispatch_async(dispatch_get_main_queue(), ^{
             NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-            [notificationCenter postNotificationName:AFNetworkingOperationDidFinishNotification object:self];
+            [notificationCenter postNotificationName:WZNetworkingOperationDidFinishNotification object:self];
         });
     }
 
@@ -457,7 +457,7 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
     [self.lock unlock];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:AFNetworkingOperationDidStartNotification object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:WZNetworkingOperationDidStartNotification object:self];
     });
 }
 
@@ -467,7 +467,7 @@ static inline BOOL AFStateTransitionIsValid(AFOperationState fromState, AFOperat
     [self.lock unlock];
 
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:AFNetworkingOperationDidFinishNotification object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:WZNetworkingOperationDidFinishNotification object:self];
     });
 }
 
