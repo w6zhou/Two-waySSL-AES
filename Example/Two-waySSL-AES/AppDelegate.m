@@ -58,13 +58,14 @@
     [request setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]].stringValue forHTTPHeaderField:@"Req-Time"];
     [request setValue:[[UIDevice currentDevice] name] forHTTPHeaderField:@"Req-Name"];
     WZHTTPRequestOperation *operation = [[WZHTTPRequestOperation alloc]initWithRequest:request];
-//    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+
     [operation setCompletionBlockWithSuccess:^(WZHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSLog(@"%@",responseObject);
         // 4. Decrypt to get JSON if message type is 2, else use check ERROR
         NSDictionary *headers = operation.response.allHeaderFields;
         if ([[headers objectForKey:@"Message-Type"] isEqualToString:@"2"]) {
             NSDictionary *json = [WZURLRequest AESDecrypt:responseObject];
+            NSLog(@"%@",json);
         } else if ([[headers objectForKey:@"ret"] isEqualToString:@"-110"]) {
             //重新执行第一步
         } else {
@@ -78,6 +79,48 @@
     [operation start];
 }
 
+- (NSString *)encode:(NSString *)input
+{
+    NSString *key = @"SXGWLZPDOKFIVUHJYTQBNMACERxswgzldpkoifuvjhtybqmncare";
+    NSMutableString *code = [[NSMutableString alloc]init];
+    for (int i = (int)input.length - 1; i >= 0; i--) {
+        int asciiCode = [input characterAtIndex:i];
+        if (asciiCode >= 65 && asciiCode <= 90) {
+            NSUInteger integer = asciiCode - 65;
+            int resultChar = [key characterAtIndex:integer];
+            [code appendString:[NSString stringWithFormat:@"%c", resultChar]];
+        } else if (asciiCode >= 97 && asciiCode <= 122) {
+            
+            NSUInteger integer = asciiCode - 97 + 26;
+            int resultChar = [key characterAtIndex:integer];
+            [code appendString:[NSString stringWithFormat:@"%c", resultChar]];
+        } else {
+            [code appendString:[NSString stringWithFormat:@"%c", asciiCode]];
+        }
+    }
+    return code;
+}
+
+- (NSString *)decode:(NSString *)input
+{
+    NSString *key = @"SXGWLZPDOKFIVUHJYTQBNMACERxswgzldpkoifuvjhtybqmncare";
+    NSMutableString *code = [[NSMutableString alloc]init];
+    for (int i = (int)input.length - 1; i >= 0; i--) {
+        int asciiCode = [input characterAtIndex:i];
+        if (asciiCode >= 65 && asciiCode <= 90) {
+            int index = (int)[key rangeOfString:[NSString stringWithFormat:@"%c", asciiCode]].location;
+            int codeOfChar = index+65;
+            [code appendString:[NSString stringWithFormat:@"%c", codeOfChar]];
+        } else if (asciiCode >= 97 && asciiCode <= 122) {
+            int index = (int)[key rangeOfString:[NSString stringWithFormat:@"%c", asciiCode]].location;
+            int codeOfChar = index-26+97;
+            [code appendString:[NSString stringWithFormat:@"%c", codeOfChar]];
+        } else {
+            [code appendString:[NSString stringWithFormat:@"%c", asciiCode]];
+        }
+    }
+    return code;
+}
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
