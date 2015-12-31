@@ -18,12 +18,12 @@ enum
 };
 typedef NSInteger WZHTTPRequestMethodType;
 
-
 @interface WZURLRequest : NSObject
 
 + (void)setAPIBaseURL:(NSString *)urlString;
 + (void)setAESKey:(NSString *)key;
++ (void)setIV:(NSString *)iv;
 + (NSMutableURLRequest *)createRequestWithURLString:(NSString *)urlString body:(NSDictionary *)body method:(WZHTTPRequestMethodType)method;
-+ (NSMutableData *)AESEncrypt:(NSString *)jsonString;
-+ (uint32_t)crc32:(NSData *)input;
++ (NSDictionary *)AESDecrypt:(NSData *)data;
+
 @end

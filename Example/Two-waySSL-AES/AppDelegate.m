@@ -17,10 +17,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
-    NSMutableData *testData = [WZURLRequest AESEncrypt:@{@"message_type":@2}];
-    
-    // Override point for customization after application launch.
+    //1. step one: get AES Key
     [WZURLRequest setAPIBaseURL:@"https://54.223.243.129:10088/api"];
     NSMutableURLRequest *request = [WZURLRequest createRequestWithURLString:@"/connect" body:@{@"message_type":@2} method:WZHTTPRequestMethodPost];
     [request setValue:@"100000" forHTTPHeaderField:@"User-Uin"];
@@ -32,11 +29,53 @@
     operation.responseSerializer = [AFJSONResponseSerializer serializer];
     [operation setCompletionBlockWithSuccess:^(WZHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSLog(@"response: %@", responseObject);
+        
+        NSNumber* returnCode = [responseObject objectForKey:@"ret"];
+        if ([returnCode intValue] == 0) {
+            //2. step two:set AES key
+            [WZURLRequest setAESKey:[responseObject objectForKey:@"key"]];
+            [WZURLRequest setIV:[responseObject objectForKey:@"iv"]];
+            
+            //3. encrypt request and decrypt response
+            [self testPhoneVerification];
+        }
     } failure:^(WZHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         NSLog(@"fail:%@",error.localizedDescription);
     }];
     [operation start];
     return YES;
+}
+
+- (void)testPhoneVerification
+{
+    [WZURLRequest setAPIBaseURL:@"http://54.223.243.129:10086/api"];
+    NSMutableURLRequest *request = [WZURLRequest createRequestWithURLString:@"/user/getverificationcode" body:@{ @"phone" : @"18682150226" } method:WZHTTPRequestMethodPost];
+#warning - please set message type to 2
+    [request setValue:@"100000" forHTTPHeaderField:@"User-Uin"];
+    [request setValue:@"2" forHTTPHeaderField:@"Message-Type"];
+    [request setValue:[@"1." stringByAppendingString:[[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"]] forHTTPHeaderField:@"Client-Version"];
+    [request setValue:@"iOS" forHTTPHeaderField:@"Req-From"];
+    [request setValue:[NSNumber numberWithInteger:[[NSDate date] timeIntervalSince1970]].stringValue forHTTPHeaderField:@"Req-Time"];
+    [request setValue:[[UIDevice currentDevice] name] forHTTPHeaderField:@"Req-Name"];
+    WZHTTPRequestOperation *operation = [[WZHTTPRequestOperation alloc]initWithRequest:request];
+//    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    [operation setCompletionBlockWithSuccess:^(WZHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"%@",responseObject);
+        // 4. Decrypt to get JSON if message type is 2, else use check ERROR
+        NSDictionary *headers = operation.response.allHeaderFields;
+        if ([[headers objectForKey:@"Message-Type"] isEqualToString:@"2"]) {
+            NSDictionary *json = [WZURLRequest AESDecrypt:responseObject];
+        } else if ([[headers objectForKey:@"ret"] isEqualToString:@"-110"]) {
+            //重新执行第一步
+        } else {
+            //其他错误
+            NSString *response = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+            NSLog(@"%@", response);
+        }
+    } failure:^(WZHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSLog(@"fail:%@",error.localizedDescription);
+    }];
+    [operation start];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
