@@ -22,7 +22,8 @@ typedef NSInteger WZHTTPRequestMethodType;
 @interface WZURLRequest : NSObject
 
 + (void)setAPIBaseURL:(NSString *)urlString;
-
++ (void)setAESKey:(NSString *)key;
 + (NSMutableURLRequest *)createRequestWithURLString:(NSString *)urlString body:(NSDictionary *)body method:(WZHTTPRequestMethodType)method;
-
++ (NSMutableData *)AESEncrypt:(NSString *)jsonString;
++ (uint32_t)crc32:(NSData *)input;
 @end

@@ -17,6 +17,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    NSMutableData *testData = [WZURLRequest AESEncrypt:@{@"message_type":@2}];
+    
     // Override point for customization after application launch.
     [WZURLRequest setAPIBaseURL:@"https://54.223.243.129:10088/api"];
     NSMutableURLRequest *request = [WZURLRequest createRequestWithURLString:@"/connect" body:@{@"message_type":@2} method:WZHTTPRequestMethodPost];
