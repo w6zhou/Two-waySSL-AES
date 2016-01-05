@@ -8,15 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-enum
+typedef enum WZHTTPRequestMethodType
 {
     WZHTTPRequestMethodGet = 0,
     WZHTTPRequestMethodPost = 1,
     WZHTTPRequestMethodPut = 2,
     WZHTTPRequestMethodDelete = 3,
     WZHTTPRequestMethodTypeSkip
+}WZHTTPRequestMethodType;
+
+enum AESHandleType
+{
+    AESHandleType_Encrypt,
+    AESHandleType_Decrypt
 };
-typedef NSInteger WZHTTPRequestMethodType;
 
 @interface WZURLRequest : NSObject
 

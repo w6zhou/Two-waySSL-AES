@@ -54,16 +54,21 @@ static NSString *initialVector = @"";
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         
-        NSData *jsonData = [WZURLRequest dictionaryToJSONData:body];
-        if (jsonData) {
-            [request setHTTPBody:jsonData];
+        if (method == WZHTTPRequestMethodPost) {
+            NSData *jsonData = [WZURLRequest dictionaryToJSONData:body];
+            if (jsonData) {
+                [request setHTTPBody:jsonData];
+            }
         }
+        
         NSLog(@"%@", [NSString stringWithFormat:@"Request:%@\nHeader:%@\n",request, [request allHTTPHeaderFields]]);
     } else {
         [request setValue:@"application/octet-stream" forHTTPHeaderField:@"Content-Type"];
         [request setValue:@"application/octet-stream" forHTTPHeaderField:@"Accept"];
-        NSData *data = [WZURLRequest AESEncrypt:body];
-        [request setHTTPBody:data];
+        if (method == WZHTTPRequestMethodPost) {
+            NSData *data = [WZURLRequest AESEncrypt:body];
+            [request setHTTPBody:data];
+        }
     }
     return request;
 }
@@ -108,6 +113,43 @@ static NSString *initialVector = @"";
     NSData *crcData = [[NSData alloc]initWithBytes:&crc32 length:sizeof(crc32)];
     [data appendData:crcData];
     
+    return [self aesHandleWithSourceData:data withType:AESHandleType_Encrypt];
+}
+
++ (NSDictionary *)AESDecrypt:(NSData *)data
+{
+    NSMutableData *cipherData = [self aesHandleWithSourceData:data withType:AESHandleType_Decrypt];
+    if (cipherData)
+    {
+        NSMutableData *crcData = [[NSMutableData alloc]initWithData:cipherData];;
+        [crcData replaceBytesInRange:NSMakeRange(0, crcData.length-4) withBytes:NULL length:0];
+        [cipherData replaceBytesInRange:NSMakeRange(cipherData.length-4, 4) withBytes:NULL length:0];
+        uint32_t crc32 = [WZURLRequest crc32:cipherData];
+        NSMutableData *checkData = [[NSMutableData alloc]initWithBytes:&crc32 length:sizeof(crc32)];
+        if ([checkData isEqualToData:crcData]) {
+            [cipherData replaceBytesInRange:NSMakeRange(0, 4) withBytes:NULL length:0];
+            
+            NSError *error = nil;
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:cipherData options:0 error:&error];
+            if (error) {
+                NSLog(@"ERROR: response is not in JSON format");
+                return nil;
+            } else {
+                return json;
+            }
+            
+        } else {
+            NSLog(@"ERROR: crc fail to check");
+            return nil;
+        }
+    }
+    
+    NSLog(@"ERROR: fail to encrypt the json string");
+    return nil;
+}
+
++(NSMutableData *)aesHandleWithSourceData:(NSData *)data withType:(enum AESHandleType)type
+{
     //Key to Data
     NSData *key = [AESKey dataUsingEncoding:NSUTF8StringEncoding];
     
@@ -115,13 +157,13 @@ static NSString *initialVector = @"";
     CCCryptorRef cryptor = NULL;
     
     // Alloc Data Out
-    NSMutableData *cipherData = [NSMutableData dataWithLength:data.length + kCCBlockSizeAES128];
+    NSMutableData *cipherData = [NSMutableData dataWithLength:data.length];
     
     //IV: initialization vector
     NSData *iv =  [initialVector dataUsingEncoding:NSUTF8StringEncoding];
     
     //Create Cryptor
-    CCCryptorStatus  create = CCCryptorCreateWithMode(kCCEncrypt,
+    CCCryptorStatus  create = CCCryptorCreateWithMode(type == AESHandleType_Encrypt?kCCEncrypt:kCCDecrypt,
                                                       kCCModeCFB8,
                                                       kCCAlgorithmAES128,
                                                       ccNoPadding,
@@ -166,91 +208,6 @@ static NSString *initialVector = @"";
             return cipherData;
         }
     }
-    NSLog(@"ERROR: fail to encrypt the json string");
-    return nil;
-}
-
-+ (NSDictionary *)AESDecrypt:(NSData *)data
-{
-    //Key to Data
-    NSData *key = [AESKey dataUsingEncoding:NSUTF8StringEncoding];
-    
-    // Init cryptor
-    CCCryptorRef cryptor = NULL;
-    
-    // Alloc Data Out
-    NSMutableData *cipherData = [NSMutableData dataWithLength:data.length + kCCBlockSizeAES128];
-    
-    //IV: initialization vector
-    NSData *iv =  [initialVector dataUsingEncoding:NSUTF8StringEncoding];
-    
-    //Create Cryptor
-    CCCryptorStatus  create = CCCryptorCreateWithMode(kCCDecrypt,
-                                                      kCCModeCFB8,
-                                                      kCCAlgorithmAES128,
-                                                      ccNoPadding,
-                                                      iv.bytes, // can be NULL, because null is full of zeros
-                                                      key.bytes,
-                                                      key.length,
-                                                      NULL,
-                                                      0,
-                                                      0,
-                                                      kCCModeOptionCTR_BE,
-                                                      &cryptor);
-    
-    if (create == kCCSuccess)
-    {
-        //alloc number of bytes written to data Out
-        size_t outLength;
-        
-        //Update Cryptor
-        CCCryptorStatus  update = CCCryptorUpdate(cryptor,
-                                                  data.bytes,
-                                                  data.length,
-                                                  cipherData.mutableBytes,
-                                                  cipherData.length,
-                                                  &outLength);
-        if (update == kCCSuccess)
-        {
-            //Cut Data Out with nedded length
-            cipherData.length = outLength;
-            
-            //Final Cryptor
-            CCCryptorStatus final = CCCryptorFinal(cryptor, //CCCryptorRef cryptorRef,
-                                                   cipherData.mutableBytes, //void *dataOut,
-                                                   cipherData.length, // size_t dataOutAvailable,
-                                                   &outLength); // size_t *dataOutMoved)
-            
-            if (final == kCCSuccess)
-            {
-                //Release Cryptor
-                //CCCryptorStatus release =
-                CCCryptorRelease(cryptor ); //CCCryptorRef cryptorRef
-            }
-            NSMutableData *crcData = [[NSMutableData alloc]initWithData:cipherData];;
-            [crcData replaceBytesInRange:NSMakeRange(0, crcData.length-4) withBytes:NULL length:0];
-            [cipherData replaceBytesInRange:NSMakeRange(cipherData.length-4, 4) withBytes:NULL length:0];
-            uint32_t crc32 = [WZURLRequest crc32:cipherData];
-            NSMutableData *checkData = [[NSMutableData alloc]initWithBytes:&crc32 length:sizeof(crc32)];
-            if ([checkData isEqualToData:crcData]) {
-                [cipherData replaceBytesInRange:NSMakeRange(0, 4) withBytes:NULL length:0];
-                
-                NSError *error = nil;
-                NSDictionary *json = [NSJSONSerialization JSONObjectWithData:cipherData options:0 error:&error];
-                if (error) {
-                    NSLog(@"ERROR: response is not in JSON format");
-                    return nil;
-                } else {
-                    return json;
-                }
-                
-            } else {
-                NSLog(@"ERROR: crc fail to check");
-                return nil;
-            }
-        }
-    }
-    NSLog(@"ERROR: fail to encrypt the json string");
     return nil;
 }
 
