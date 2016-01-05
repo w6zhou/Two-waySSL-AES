@@ -17,6 +17,7 @@ static NSString *initialVector = @"";
 
 @implementation WZURLRequest
 
+
 + (void)setAPIBaseURL:(NSString *)urlString{
     baseURLString = urlString;
 }
@@ -109,7 +110,7 @@ static NSString *initialVector = @"";
     NSString *jsonString = [WZURLRequest dictionaryToJSONString:body];
     NSString *bodyString = [NSString stringWithFormat:@"~1Ba%@",jsonString];
     NSMutableData *data = [[NSMutableData alloc]initWithData:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
-    uint32_t crc32 = [WZURLRequest crc32:[bodyString dataUsingEncoding:NSASCIIStringEncoding]];
+    uint32_t crc32 = [WZURLRequest crc32:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
     NSData *crcData = [[NSData alloc]initWithBytes:&crc32 length:sizeof(crc32)];
     [data appendData:crcData];
     
