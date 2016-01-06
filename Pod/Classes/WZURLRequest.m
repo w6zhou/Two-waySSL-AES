@@ -50,7 +50,7 @@ static NSString *initialVector = @"";
             [request setHTTPMethod:@"DELETE"];
             break;
     }
-    if ([AESKey isEqualToString:@""]) {
+    if ([AESKey length] == 0) {
         
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
