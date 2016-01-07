@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "Two-waySSL-AES"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "A useful lib for network security."
   s.description  = <<-DESC
   This one use Two-way SSL to get key for AES encryption.
